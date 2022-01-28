@@ -77,8 +77,7 @@ async def get_ptitle(url):
     v_id = v_id[1:v_len - 2]
 
     v_url = 'https://www.pdisks.com/share-video?videoid=' + v_id
-    res = [str, v_url]
-    return res
+    return [str, v_url]
 
 
 async def pdisk_up(link):
@@ -96,8 +95,7 @@ async def pdisk_up(link):
     data = dict(data)
     print(data)
     v_id = data['data']['item_id']
-    v_url = 'https://www.pdisks.com/share-video?videoid=' + v_id
-    return (v_url)
+    return 'https://www.pdisks.com/share-video?videoid=' + v_id
 
 
 async def multi_pdisk_up(ml_string):
@@ -110,19 +108,14 @@ async def multi_pdisk_up(ml_string):
     nml_len = len(new_ml_string)
     u_len = len(urls)
     url_index = []
-    count = 0
-    for i in range(nml_len):
+    for count, i in enumerate(range(nml_len)):
         for j in range(u_len):
             if (urls[j] in new_ml_string[i]):
                 url_index.append(count)
-        count += 1
     new_urls = await new_pdisk_url(urls)
     url_index = list(dict.fromkeys(url_index))
-    i = 0
-    for j in url_index:
+    for i, j in enumerate(url_index):
         new_ml_string[j] = new_ml_string[j].replace(urls[i], new_urls[i])
-        i += 1
-
     new_string = " ".join(new_ml_string)
     return await addFooter(new_string)
 
