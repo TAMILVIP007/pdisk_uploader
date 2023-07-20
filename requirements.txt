@@ -1,5 +1,5 @@
 pyrogram
 tgcrypto
-aiohttp==3.7.4
+aiohttp==3.8.5
 requests
 bs4
